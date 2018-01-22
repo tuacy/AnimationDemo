@@ -4,16 +4,21 @@
         <objectAnimator
             android:propertyName="x"
             android:duration="500"
+            android:valueFrom="0"
             android:valueTo="400"
-            android:valueType="intType" />
+            android:valueType="floatType"
+            android:interpolator="@android:anim/bounce_interpolator" />
         <objectAnimator
             android:propertyName="y"
             android:duration="500"
+            android:valueFrom="0"
             android:valueTo="300"
-            android:valueType="intType" />
+            android:valueType="floatType" />
     </set>
     <objectAnimator
         android:propertyName="alpha"
         android:duration="500"
-        android:valueTo="1f" />
+        android:valueFrom="0"
+        android:valueTo="1f"
+        android:valueType="floatType"/>
 </set>

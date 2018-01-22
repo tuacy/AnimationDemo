@@ -3,6 +3,7 @@ package com.tuacy.animationdemo.propertyanimation;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -66,6 +67,16 @@ public class PropertyAnimationActivity extends AppCompatActivity {
 	}
 
 	private void startJavaProperty() {
-
+		AnimatorSet animatorSet = new AnimatorSet();
+		ObjectAnimator objectXAnimator = ObjectAnimator.ofFloat(mViewMove, "x", 0, 400f);
+		objectXAnimator.setDuration(500);
+		ObjectAnimator objectYAnimator = ObjectAnimator.ofFloat(mViewMove, "y", 0, 300f);
+		objectYAnimator.setDuration(500);
+		animatorSet.playTogether(objectXAnimator, objectYAnimator);
+		ObjectAnimator objectAlphaAnimator = ObjectAnimator.ofFloat(mViewMove, "alpha", 0, 1f);
+		objectAlphaAnimator.setDuration(500);
+		AnimatorSet animatorSetResult = new AnimatorSet();
+		animatorSetResult.playSequentially(animatorSet, objectAlphaAnimator);
+		animatorSetResult.start();
 	}
 }
