@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".propertyanimation.PropertyAnimationActivity"
+            android:label="属性动画(Property Animation)"/>
+
+        <activity android:name=".viewanimation.ViewAnimationActivity"
+            android:label="视图动画(View Animation)"/>
     </application>
 
 </manifest>
