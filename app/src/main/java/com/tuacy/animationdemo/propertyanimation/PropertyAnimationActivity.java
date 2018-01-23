@@ -11,9 +11,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.tuacy.animationdemo.R;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PropertyAnimationActivity extends AppCompatActivity {
 
@@ -21,10 +23,10 @@ public class PropertyAnimationActivity extends AppCompatActivity {
 		context.startActivity(new Intent(context, PropertyAnimationActivity.class));
 	}
 
-	private Context  mContext;
-	private TextView mViewMove;
-	private Button   mButtonXml;
-	private Button   mButtonJava;
+	private Context         mContext;
+	private CircleImageView mImageView;
+	private Button          mButtonXml;
+	private Button          mButtonJava;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +39,10 @@ public class PropertyAnimationActivity extends AppCompatActivity {
 	}
 
 	private void initView() {
-		mViewMove = findViewById(R.id.view_property_move);
+		mImageView = findViewById(R.id.image_icon);
+		Picasso.with(mContext)
+			   .load("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1960816299,803825902&fm=27&gp=0.jpg")
+			   .into(mImageView);
 		mButtonXml = findViewById(R.id.button_property_xml);
 		mButtonJava = findViewById(R.id.button_property_java);
 	}
@@ -62,21 +67,19 @@ public class PropertyAnimationActivity extends AppCompatActivity {
 
 	private void startXmlProperty() {
 		AnimatorSet animationSet = (AnimatorSet) AnimatorInflater.loadAnimator(mContext, R.animator.property_set);
-		animationSet.setTarget(mViewMove);
+		animationSet.setTarget(mImageView);
 		animationSet.start();
 	}
 
 	private void startJavaProperty() {
 		AnimatorSet animatorSet = new AnimatorSet();
-		ObjectAnimator objectXAnimator = ObjectAnimator.ofFloat(mViewMove, "x", 0, 400f);
-		objectXAnimator.setDuration(500);
-		ObjectAnimator objectYAnimator = ObjectAnimator.ofFloat(mViewMove, "y", 0, 300f);
-		objectYAnimator.setDuration(500);
-		animatorSet.playTogether(objectXAnimator, objectYAnimator);
-		ObjectAnimator objectAlphaAnimator = ObjectAnimator.ofFloat(mViewMove, "alpha", 0, 1f);
-		objectAlphaAnimator.setDuration(500);
+		ObjectAnimator objectXAnimator = ObjectAnimator.ofFloat(mImageView, "rotation", 0f, 360f);
+		objectXAnimator.setDuration(10000);
+		animatorSet.playTogether(objectXAnimator);
+		ObjectAnimator objectAlphaAnimator = ObjectAnimator.ofFloat(mImageView, "alpha", 0f, 1f);
+		objectAlphaAnimator.setDuration(10000);
 		AnimatorSet animatorSetResult = new AnimatorSet();
-		animatorSetResult.playSequentially(animatorSet, objectAlphaAnimator);
+		animatorSetResult.playTogether(animatorSet, objectAlphaAnimator);
 		animatorSetResult.start();
 	}
 }
