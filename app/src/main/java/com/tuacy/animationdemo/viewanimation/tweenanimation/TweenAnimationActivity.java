@@ -135,15 +135,16 @@ public class TweenAnimationActivity extends AppCompatActivity {
 			set.setDuration(2000);
 			set.setInterpolator(new LinearInterpolator());
 			AnimationSet childSet = new AnimationSet(true);
+			RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 			TranslateAnimation translate = new TranslateAnimation(Animation.ABSOLUTE, 0, Animation.RELATIVE_TO_SELF, 1, Animation.ABSOLUTE,
 																  0, Animation.RELATIVE_TO_SELF, 1);
-			RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-			childSet.addAnimation(translate);
 			childSet.addAnimation(rotate);
+			childSet.addAnimation(translate);
 			AlphaAnimation alpha = new AlphaAnimation(1, 0);
 			set.addAnimation(childSet);
 			set.addAnimation(alpha);
 			mImageView.startAnimation(set);
+
 		}
 	}
 
